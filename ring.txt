@@ -1,0 +1,31 @@
+class RingProcess:
+    def __init__(self, process_id, num_processes):
+        self.process_id = process_id
+        self.num_processes = num_processes
+        self.neighbor_id = (process_id + 1) % num_processes
+        self.message = None
+
+    def send_message(self, message, processes):
+        next_process = processes[self.neighbor_id]
+        next_process.receive_message(message)
+
+    def receive_message(self, message):
+        if self.message is None:
+            self.message = message
+            print(f"Process {self.process_id} received message: {message}")
+
+        if message['id'] > self.process_id:
+            self.send_message(message, processes)
+        elif message['id'] == self.process_id:
+            print(f"Process {self.process_id} is the leader.")
+            self.send_message(message, processes)
+
+def main():
+    num_processes = 5  
+    processes = [RingProcess(i, num_processes) for i in range(num_processes)]
+
+    initial_message = {'id': 0}
+    processes[0].send_message(initial_message, processes)
+
+if __name__ == "__main__":
+    main()

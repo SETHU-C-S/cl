@@ -1,0 +1,28 @@
+class bully:
+    status=[] 
+    priority=[] 
+    c=0 
+    n=int(input("enter number of candidates:")) 
+    
+    def candidates(self):
+        for i in range(0,self.n):
+            print("enter the status of ",i+1) 
+            self.status.append(int(input())) 
+            print("enter the priority of ",i+1) 
+            self.priority.append(int(input())) 
+    def selector(self,v):
+         v=v-1
+         self.c=v+1 
+         for i in range(0,self.n):
+             if self.priority[v]<self.priority[i]: 
+                 print("message sent from ",v+1,"to",i+1) 
+                 if self.status[i]==1: 
+                     self.selector(i+1)
+         return self.c
+            
+    def initiator(self):
+         k=int(input("enter the initiator")) 
+         print(self.selector(k)) 
+p=bully()
+p.candidates() 
+p.initiator()
