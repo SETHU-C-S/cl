@@ -1,0 +1,6 @@
+from jsonrpclib import Server
+def main():
+      conn = Server('http://localhost:1006')
+      print(conn.findsum(100,200))
+if __name__ == '__main__':
+main()

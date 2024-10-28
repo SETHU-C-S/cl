@@ -1,0 +1,11 @@
+from jsonrpclib.SimpleJSONRPCServer import SimpleJSONRPCServer
+def findsum(num1,num2):
+       res=num1+num2
+       return res
+def main():
+      server = SimpleJSONRPCServer(('localhost',1006))
+      server.register_function(findsum)
+      print("Start server")
+      server.serve_forever()
+if __name__ == '__main__':
+      main()
